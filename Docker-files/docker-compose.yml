@@ -1,7 +1,10 @@
 version: '3.8'
 services:
   vprodb:
-    image: vprocontainers/vprofiledb
+    build:
+      context: /home/ubuntu/vprofile-project/Docker-files/db
+    image: sunil2211/vprofiledb
+    container_name: vprodb
     ports:
       - "3306:3306"
     volumes:
@@ -23,14 +26,20 @@ services:
       - RABBITMQ_DEFAULT_PASS=guest
 
   vproapp:
-    image: vprocontainers/vprofileapp
+    build:
+      context: /home/ubuntu/vprofile-project/Docker-files/app
+    image: sunil2211/vprofileapp
+    container_name: vproapp
     ports:
       - "8080:8080"
     volumes: 
       - vproappdata:/usr/local/tomcat/webapps
 
   vproweb:
-    image: vprocontainers/vprofileweb
+    build:
+      context: /home/ubuntu/vprofile-project/Docker-files/web
+    image: sunil2211/vprofileweb
+    container_name: vproweb
     ports:
       - "80:80"
 volumes:
